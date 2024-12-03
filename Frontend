@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Findit</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="logo" onclick="goToMainPage()">Findit</h1>
+        <input type="text" id="subredditInput" placeholder="Enter subreddit">
+        <button onclick="fetchSubreddit()">Search</button>
+    </div>
+    <div id="content">
+        <div id="sidebar">
+            <h3>Popular Subreddits</h3>
+            <ul id="popularSubreddits">
+                <li onclick="fetchSubreddit('funny')">r/funny</li>
+                <li onclick="fetchSubreddit('news')">r/news</li>
+                <li onclick="fetchSubreddit('gaming')">r/gaming</li>
+                <li onclick="fetchSubreddit('pics')">r/pics</li>
+            </ul>
+        </div>
+        <div id="mainContent">
+            <h3 id="subredditTitle"></h3>
+            <ul id="postsList"></ul>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.header .logo {
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.header input {
+    flex: 1;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+#content {
+    display: flex;
+    height: calc(100vh - 50px);
+}
+
+#sidebar {
+    width: 25%;
+    background-color: #f0f0f0;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+#mainContent {
+    width: 75%;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: #ddd;
+}
+const API_URL = 'https://your-backend-url.com/fetch_subreddit'; // Replace with your backend URL
+
+function goToMainPage() {
+    document.getElementById('sidebar').style.display = 'block';
+    document.getElementById('mainContent').innerHTML = '';
+}
+
+function fetchSubreddit(subreddit = null) {
+    if (!subreddit) {
+        subreddit = document.getElementById('subredditInput').value;
+    }
+
+    fetch(`${API_URL}?subreddit=${subreddit}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('sidebar').style.display = 'none';
+            const postsList = document.getElementById('postsList');
+            postsList.innerHTML = '';
+            data.forEach(post => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${post.title}</strong><br>${post.is_video ? 'Video' : (post.num_images ? `${post.num_images} Images` : 'Text')}`;
+                listItem.onclick = () => {
+                    document.getElementById('mainContent').innerHTML = `<h3>${post.title}</h3><p>${post.selftext || 'No content'}</p>`;
+                };
+                postsList.appendChild(listItem);
+            });
+        })
+        .catch(err => console.error(err));
+}
