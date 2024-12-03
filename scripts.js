@@ -9,6 +9,7 @@ function fetchSubreddit(subreddit = null) {
     if (!subreddit) {
         subreddit = document.getElementById('subredditInput').value;
     }
+
     // Function to show logs in the console box
 function logToConsole(message) {
     const consoleOutput = document.getElementById('console-output');
