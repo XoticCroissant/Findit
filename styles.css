@@ -16,9 +16,24 @@ body {
     color: white;
 }
 
-.header input {
-    margin-left: 10px;
+.header .search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.header .search-bar input {
     padding: 5px;
+}
+
+#searchButton img {
+    width: 20px;
+    height: 20px;
+}
+
+.settings-icon img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 #content {
@@ -78,7 +93,7 @@ body {
 /* Settings Panel */
 #settings {
     position: fixed;
-    top: 10px;
+    top: 50px;
     right: 10px;
     background-color: #333;
     color: #fff;
@@ -87,6 +102,16 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     display: none; /* Hidden by default */
     z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        right: -300px;
+    }
+    to {
+        right: 10px;
+    }
 }
 
 #settings h4 {
@@ -107,4 +132,9 @@ button {
 
 button:hover {
     background-color: #444;
+}
+
+/* Lightened Background Color for Boxes */
+.lightened-bg {
+    background-color: #333 !important; /* Lighten by adding shades */
 }
