@@ -19,6 +19,27 @@
     <div id="console-output"></div>
 </div>
 
+    <div id="settings">
+    <h4>Customize Theme</h4>
+    <label for="bgColor">Background Color: </label>
+    <input type="color" id="bgColor" value="#121212">
+    <br><br>
+    <label for="textColor">Text Color: </label>
+    <input type="color" id="textColor" value="#e0e0e0">
+    <br><br>
+    <label for="fontSize">Text Size: </label>
+    <input type="number" id="fontSize" value="16" min="10" max="24">
+    <br><br>
+    <label for="tabName">Tab Name: </label>
+    <input type="text" id="tabName" placeholder="Enter new tab name">
+    <br><br>
+    <button onclick="saveSettings()">Save Settings</button>
+    <button onclick="toggleSettings()">Close</button>
+</div>
+
+<!-- Settings button in top right -->
+<button onclick="toggleSettings()" style="position: fixed; top: 10px; right: 10px; background-color: #333; color: #fff; border: none; padding: 10px; cursor: pointer;">Settings</button>
+
     
     <div id="content">
         <div id="sidebar">
