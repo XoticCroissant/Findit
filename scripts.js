@@ -60,6 +60,30 @@ function logToConsole(message) {
     consoleOutput.scrollTop = consoleOutput.scrollHeight; // Auto-scroll to the bottom
 }
 
+// Toggle Settings Panel
+function toggleSettings() {
+    const settingsPanel = document.getElementById('settings');
+    settingsPanel.style.display = settingsPanel.style.display === 'block' ? 'none' : 'block';
+}
+
+// Save settings and apply changes
+function saveSettings() {
+    const bgColor = document.getElementById('bgColor').value;
+    const textColor = document.getElementById('textColor').value;
+    const fontSize = document.getElementById('fontSize').value;
+    const tabName = document.getElementById('tabName').value;
+
+    // Apply changes
+    document.body.style.backgroundColor = bgColor;
+    document.body.style.color = textColor;
+    document.body.style.fontSize = fontSize + 'px';
+    document.title = tabName || 'Findit'; // Update tab name if provided
+
+    // Hide settings panel after saving
+    toggleSettings();
+}
+
+
 // Override console methods to redirect to custom console
 (function overrideConsole() {
     const originalConsoleLog = console.log;
