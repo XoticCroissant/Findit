@@ -9,38 +9,33 @@
 <body>
     <div class="header">
         <h1 class="logo" onclick="goToMainPage()">Findit</h1>
-        <input type="text" id="subredditInput" placeholder="Enter subreddit">
-        <button onclick="fetchSubreddit()">Search</button>
+        <div class="search-bar">
+            <input type="text" id="subredditInput" placeholder="Enter subreddit">
+            <button id="searchButton" onclick="fetchSubreddit()">
+                <img src="search-icon.png" alt="Search">
+            </button>
+        </div>
+        <!-- Settings icon (will open the dropdown) -->
+        <div class="settings-icon" onclick="toggleSettings()">
+            <img src="settings-icon.png" alt="Settings">
+        </div>
     </div>
 
-<!-- Console box for logs -->
-<div id="console" class="hidden">
-    <div id="console-header">Console</div>
-    <div id="console-output"></div>
-</div>
+    <!-- Settings Panel -->
+    <div id="settings" class="settings-panel">
+        <h4>Customize Theme</h4>
+        <label for="bgColor">Background Color:</label>
+        <input type="color" id="bgColor" value="#121212">
+        <br>
+        <label for="textColor">Text Color:</label>
+        <input type="color" id="textColor" value="#e0e0e0">
+        <br>
+        <label for="fontSize">Font Size:</label>
+        <input type="range" id="fontSize" min="12" max="24" value="16">
+        <br>
+        <button onclick="applySettings()">Apply</button>
+    </div>
 
-    <div id="settings">
-    <h4>Customize Theme</h4>
-    <label for="bgColor">Background Color: </label>
-    <input type="color" id="bgColor" value="#121212">
-    <br><br>
-    <label for="textColor">Text Color: </label>
-    <input type="color" id="textColor" value="#e0e0e0">
-    <br><br>
-    <label for="fontSize">Text Size: </label>
-    <input type="number" id="fontSize" value="16" min="10" max="24">
-    <br><br>
-    <label for="tabName">Tab Name: </label>
-    <input type="text" id="tabName" placeholder="Enter new tab name">
-    <br><br>
-    <button onclick="saveSettings()">Save Settings</button>
-    <button onclick="toggleSettings()">Close</button>
-</div>
-
-<!-- Settings button in top right -->
-<button onclick="toggleSettings()" style="position: fixed; top: 10px; right: 10px; background-color: #333; color: #fff; border: none; padding: 10px; cursor: pointer;">Settings</button>
-
-    
     <div id="content">
         <div id="sidebar">
             <h3>Popular Subreddits</h3>
@@ -56,6 +51,8 @@
             <ul id="postsList"></ul>
         </div>
     </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>
+l>
