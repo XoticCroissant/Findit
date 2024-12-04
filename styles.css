@@ -98,7 +98,7 @@ body {
 .settings-panel {
     display: none;
     position: absolute;
-    top: 50px;
+    top: -300px; /* Initially hidden above the viewport */
     right: 20px;
     background-color: #222;
     color: white;
@@ -106,10 +106,24 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     z-index: 1001;
     border-radius: 5px;
+    width: 200px;
+    transition: top 0.3s ease-in-out; /* Animation for sliding in and out */
+}
+
+.settings-panel.open {
+    top: 50px; /* When open, it slides into view */
 }
 
 .settings-panel label {
     display: block;
     margin: 5px 0;
+}
+
+.settings-panel input {
+    margin: 5px 0;
+}
+
+.settings-panel button {
+    margin-top: 10px;
 }
 
