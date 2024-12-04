@@ -1,10 +1,8 @@
-/* Default Dark Theme */
 body {
-    background-color: #121212;
-    color: #e0e0e0;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f5f5f5;
 }
 
 .header {
@@ -16,24 +14,27 @@ body {
     color: white;
 }
 
-.header .search-bar {
+.logo {
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.search-bar {
     display: flex;
     align-items: center;
 }
 
-.header .search-bar input {
+.search-bar input {
+    margin-left: 10px;
     padding: 5px;
 }
 
-#searchButton img {
-    width: 20px;
-    height: 20px;
-}
-
-.settings-icon img {
-    width: 25px;
-    height: 25px;
+.search-bar button {
+    background: none;
+    border: none;
     cursor: pointer;
+    padding: 5px;
 }
 
 #content {
@@ -43,7 +44,7 @@ body {
 
 #sidebar {
     width: 25%;
-    background-color: #1e1e1e;
+    background-color: #fff;
     padding: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
@@ -52,7 +53,7 @@ body {
     width: 70%;
     margin-left: 20px;
     padding: 10px;
-    background-color: #1e1e1e;
+    background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -90,51 +91,25 @@ body {
     overflow-y: auto;
 }
 
-/* Settings Panel */
-#settings {
-    position: fixed;
-    top: 50px;
-    right: 10px;
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    display: none; /* Hidden by default */
-    z-index: 1000;
-    animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-    from {
-        right: -300px;
-    }
-    to {
-        right: 10px;
-    }
-}
-
-#settings h4 {
-    margin-top: 0;
-}
-
-#settings input {
-    margin-right: 10px;
-}
-
-/* Styling for Settings Button */
-button {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #555;
+.settings-icon {
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #444;
+.settings-panel {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background-color: #222;
+    color: white;
+    padding: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    border-radius: 5px;
 }
 
-/* Lightened Background Color for Boxes */
-.lightened-bg {
-    background-color: #333 !important; /* Lighten by adding shades */
+.settings-panel label {
+    display: block;
+    margin: 5px 0;
 }
+
