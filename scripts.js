@@ -27,6 +27,12 @@ document.addEventListener('keydown', function(event) {
 // Example: Log a message to the console when the page is loaded
 logToConsole('Console is now active. Press F12 to toggle it.');
 
+    // Test script to ensure it's working
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('JavaScript is loaded!');
+    alert('JavaScript is working!');
+});
+
 
     fetch(`${API_URL}?subreddit=${subreddit}`)
         .then(response => response.json())
