@@ -7,11 +7,11 @@ body {
 
 .header {
     background-color: #0073e6;
+    color: white;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
 }
 
 .header-left {
@@ -19,16 +19,14 @@ body {
     align-items: center;
 }
 
-.logo {
-    font-size: 24px;
-    cursor: pointer;
+.header-left h1 {
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .search-bar {
     display: flex;
     align-items: center;
-    gap: 5px;
 }
 
 .search-bar input {
@@ -39,50 +37,48 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    color: white;
 }
 
-.header-right {
-    display: flex;
-    align-items: center;
+.icon {
+    width: 20px;
+    height: 20px;
 }
 
-.settings-icon {
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.settings-panel {
-    display: none;
+#settings {
     position: absolute;
     top: -300px;
     right: 20px;
-    background-color: #222;
-    color: white;
-    padding: 15px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    z-index: 1001;
-    border-radius: 5px;
     width: 200px;
-    transition: top 0.3s ease-in-out; /* Slide in/out animation */
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: top 0.3s ease;
 }
 
-.settings-panel.open {
-    display: block;
-    top: 50px; /* Slide into view */
+#settings.hidden {
+    display: none;
 }
 
-.settings-panel label {
-    display: block;
-    margin: 5px 0;
+#content {
+    display: flex;
+    margin: 20px;
 }
 
-.settings-panel input {
-    margin: 5px 0;
+#sidebar {
+    width: 25%;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.settings-panel button {
-    margin-top: 10px;
+#mainContent {
+    flex-grow: 1;
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 #console {
@@ -95,26 +91,13 @@ body {
     color: #fff;
     overflow-y: auto;
     border-top: 2px solid #444;
-    display: none; /* Hidden initially */
+    display: flex;
     flex-direction: column;
     font-family: monospace;
     font-size: 12px;
     z-index: 1000;
 }
 
-#console.visible {
-    display: flex;
-}
-
-#console-header {
-    background-color: #444;
-    padding: 5px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#console-output {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: auto;
+#console.hidden {
+    display: none;
 }
