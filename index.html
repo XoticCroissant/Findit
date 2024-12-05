@@ -8,56 +8,39 @@
 </head>
 <body>
     <div class="header">
-        <h1 class="logo" onclick="goToMainPage()">Findit</h1>
-        <div class="search-bar">
-            <input type="text" id="subredditInput" placeholder="Enter subreddit">
-            <button id="searchButton" onclick="fetchSubreddit()">
-                <img src="search-icon.png" alt="Search">
-            </button>
+        <div class="header-left">
+            <div class="logo" onclick="goToMainPage()">Findit</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." id="searchInput">
+                <button onclick="searchSubreddit()">
+                    <i class="fas fa-search"></i> <!-- Font Awesome Search Icon -->
+                </button>
+            </div>
         </div>
-        <!-- Settings icon (will open the dropdown) -->
-        <div class="settings-icon" onclick="toggleSettings()">
-            <img src="settings-icon.png" alt="Settings">
+        <div class="header-right">
+            <i class="fas fa-cog settings-icon" onclick="toggleSettings()"></i>
         </div>
     </div>
 
-    <!-- Settings Panel (Initially hidden) -->
     <div id="settings" class="settings-panel">
-        <h4>Customize Theme</h4>
+        <h3>Settings</h3>
         <label for="bgColor">Background Color:</label>
-        <input type="color" id="bgColor" value="#121212">
-        <br>
+        <input type="color" id="bgColor" value="#f5f5f5">
         <label for="textColor">Text Color:</label>
-        <input type="color" id="textColor" value="#e0e0e0">
-        <br>
+        <input type="color" id="textColor" value="#000000">
         <label for="fontSize">Font Size:</label>
-        <input type="range" id="fontSize" min="12" max="24" value="16">
-        <br>
+        <input type="number" id="fontSize" value="16">
         <button onclick="applySettings()">Apply</button>
     </div>
 
     <div id="content">
-        <div id="sidebar">
-            <h3>Popular Subreddits</h3>
-            <ul id="popularSubreddits">
-                <li onclick="fetchSubreddit('funny')">r/funny</li>
-                <li onclick="fetchSubreddit('news')">r/news</li>
-                <li onclick="fetchSubreddit('gaming')">r/gaming</li>
-                <li onclick="fetchSubreddit('pics')">r/pics</li>
-            </ul>
-        </div>
-        <div id="mainContent">
-            <h3 id="subredditTitle"></h3>
-            <ul id="postsList"></ul>
-        </div>
+        <div id="sidebar"></div>
+        <div id="mainContent"></div>
     </div>
 
-    <!-- Console -->
-    <div id="console">
-        <div id="console-header" onclick="toggleConsole()">Console</div>
-        <div id="console-output">
-            <p>Console is ready!</p>
-        </div>
+    <div id="console" class="hidden">
+        <div id="console-header" onclick="toggleConsole()">Console (Click to Toggle)</div>
+        <div id="console-output"></div>
     </div>
 
     <script src="scripts.js"></script>
