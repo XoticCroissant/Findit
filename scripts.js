@@ -66,6 +66,75 @@ function searchSubreddit() {
     // Here you can add code to fetch and display posts.
 }
 
+// Console Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const consoleDiv = document.getElementById("console");
+    consoleDiv.classList.add("hidden");
+});
+
+function toggleConsole() {
+    const consoleDiv = document.getElementById('console');
+    consoleDiv.classList.toggle('hidden');
+}
+
+// Settings Logic
+function toggleSettings() {
+    const settingsPanel = document.getElementById('settings');
+    if (settingsPanel.style.top === '50px') {
+        settingsPanel.style.top = '-300px';
+    } else {
+        settingsPanel.style.top = '50px';
+    }
+}
+
+function applySettings() {
+    const bgColor = document.getElementById('bgColor').value;
+    const textColor = document.getElementById('textColor').value;
+    const fontSize = document.getElementById('fontSize').value;
+
+    document.body.style.backgroundColor = bgColor;
+    document.body.style.color = textColor;
+    document.body.style.fontSize = `${fontSize}px`;
+
+    // Update box colors
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    sidebar.style.backgroundColor = lightenColor(bgColor, 0.2);
+    mainContent.style.backgroundColor = lightenColor(bgColor, 0.2);
+}
+
+// Lighten color helper
+function lightenColor(color, percent) {
+    const num = parseInt(color.slice(1), 16);
+    const amt = Math.round(2.55 * percent * 100);
+    const R = (num >> 16) + amt;
+    const G = ((num >> 8) & 0x00FF) + amt;
+    const B = (num & 0x0000FF) + amt;
+
+    return `rgb(${Math.min(255, R)}, ${Math.min(255, G)}, ${Math.min(255, B)})`;
+}
+
+// Search Subreddit
+function searchSubreddit() {
+    const input = document.getElementById('searchInput').value.trim();
+    if (!input) {
+        console.log('Please enter a subreddit name.');
+        return;
+    }
+    console.log(`Fetching posts from subreddit: ${input}`);
+}
+
+// Fetch Subreddit
+function fetchSubreddit(subreddit) {
+    console.log(`Fetching posts from subreddit: ${subreddit}`);
+}
+
+// Main Page Navigation
+function goToMainPage() {
+    console.log('Navigating to the main page.');
+}
+
+
 // Navigate to main page
 function goToMainPage() {
     console.log('Navigating to the main page.');
