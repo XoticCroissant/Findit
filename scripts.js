@@ -1,111 +1,73 @@
-const API_URL = 'https://your-backend-url.com/fetch_subreddit'; // Replace with your backend URL
+// Ensure console starts hidden
+document.addEventListener('DOMContentLoaded', () => {
+    const consoleDiv = document.getElementById("console");
+    consoleDiv.classList.add("hidden");
+});
 
-// Navigate back to the main page
-function goToMainPage() {
-    document.getElementById('sidebar').style.display = 'block';
-    document.getElementById('mainContent').innerHTML = '';
-    document.getElementById('subredditTitle').textContent = '';
+// Toggle console visibility
+function toggleConsole() {
+    const consoleDiv = document.getElementById('console');
+    consoleDiv.classList.toggle('visible');
 }
 
-// Fetch subreddit data
-function fetchSubreddit(subreddit = null) {
-    if (!subreddit) {
-        subreddit = document.getElementById('subredditInput').value.trim();
-    }
-
-    if (!subreddit) {
-        logToConsole('Please enter a subreddit name.');
-        return;
-    }
-
-    logToConsole(`Fetching posts from r/${subreddit}...`);
-
-    fetch(`${API_URL}?subreddit=${subreddit}`)
-        .then(response => {
-            if (!response.ok) throw new Error(`Failed to fetch subreddit: ${response.status}`);
-            return response.json();
-        })
-        .then(data => {
-            document.getElementById('sidebar').style.display = 'none';
-            document.getElementById('subredditTitle').textContent = `Posts from r/${subreddit}`;
-            
-            const postsList = document.getElementById('postsList');
-            postsList.innerHTML = ''; // Clear previous posts
-
-            data.forEach(post => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `<strong>${post.title}</strong><br>
-                    ${post.is_video ? 'Video' : (post.num_images ? `${post.num_images} Images` : 'Text')}`;
-                listItem.onclick = () => {
-                    document.getElementById('mainContent').innerHTML = `
-                        <h3>${post.title}</h3>
-                        <p>${post.selftext || 'No additional content available.'}</p>`;
-                };
-                postsList.appendChild(listItem);
-            });
-
-            logToConsole(`Loaded ${data.length} posts from r/${subreddit}.`);
-        })
-        .catch(err => {
-            logToConsole(`Error: ${err.message}`);
-        });
-}
-
-// Custom Console Feature
-function logToConsole(message) {
-    const consoleOutput = document.getElementById('console-output');
-    const logEntry = document.createElement('div');
-    logEntry.textContent = message;
-    consoleOutput.appendChild(logEntry);
-    consoleOutput.scrollTop = consoleOutput.scrollHeight; // Auto-scroll to the bottom
-}
-
-// Toggle Settings Panel
+// Toggle settings panel with slide animation
 function toggleSettings() {
     const settingsPanel = document.getElementById('settings');
-    settingsPanel.style.display = settingsPanel.style.display === 'block' ? 'none' : 'block';
+    if (settingsPanel.classList.contains('open')) {
+        // Slide up to close
+        settingsPanel.style.top = '-300px';
+        setTimeout(() => settingsPanel.classList.remove('open'), 300); // Delay to match transition
+    } else {
+        // Slide down to open
+        settingsPanel.classList.add('open');
+        settingsPanel.style.top = '50px';
+    }
 }
 
-// Save settings and apply changes
-function saveSettings() {
+// Apply user settings
+function applySettings() {
     const bgColor = document.getElementById('bgColor').value;
     const textColor = document.getElementById('textColor').value;
     const fontSize = document.getElementById('fontSize').value;
-    const tabName = document.getElementById('tabName').value;
 
-    // Apply changes
+    // Update styles
     document.body.style.backgroundColor = bgColor;
     document.body.style.color = textColor;
-    document.body.style.fontSize = fontSize + 'px';
-    document.title = tabName || 'Findit'; // Update tab name if provided
+    document.body.style.fontSize = `${fontSize}px`;
 
-    // Hide settings panel after saving
-    toggleSettings();
+    // Automatically update box colors to lighter shade
+    const lighterColor = lightenColor(bgColor, 0.2);
+    document.querySelectorAll('#sidebar, #mainContent').forEach(box => {
+        box.style.backgroundColor = lighterColor;
+    });
 }
 
+// Helper to lighten colors
+function lightenColor(hex, percent) {
+    const R = parseInt(hex.slice(1, 3), 16);
+    const G = parseInt(hex.slice(3, 5), 16);
+    const B = parseInt(hex.slice(5, 7), 16);
 
-// Override console methods to redirect to custom console
-(function overrideConsole() {
-    const originalConsoleLog = console.log;
-    console.log = function (message) {
-        logToConsole(message);
-        originalConsoleLog(message);
-    };
+    const newR = Math.min(Math.round(R + (255 - R) * percent), 255);
+    const newG = Math.min(Math.round(G + (255 - G) * percent), 255);
+    const newB = Math.min(Math.round(B + (255 - B) * percent), 255);
 
-    const originalConsoleError = console.error;
-    console.error = function (message) {
-        logToConsole(`ERROR: ${message}`);
-        originalConsoleError(message);
-    };
-})();
+    return `rgb(${newR}, ${newG}, ${newB})`;
+}
 
-// Toggle custom console visibility
-document.addEventListener('keydown', function (event) {
-    if (event.ctrlKey && event.altKey && event.key === 'c') {
-        const consoleBox = document.getElementById('console');
-        consoleBox.classList.toggle('hidden');
+// Search subreddit
+function searchSubreddit() {
+    const input = document.getElementById('searchInput').value.trim();
+    if (!input) {
+        console.log('Please enter a subreddit name.');
+        return;
     }
-});
+    console.log(`Fetching posts from subreddit: ${input}`);
+    // Here you can add code to fetch and display posts.
+}
 
-// Initial log message to confirm functionality
-console.log('Custom console initialized. Press Ctrl + Alt + C to toggle.');
+// Navigate to main page
+function goToMainPage() {
+    console.log('Navigating to the main page.');
+    // Add logic to reset or clear the current view to the homepage.
+}
